@@ -19,29 +19,36 @@ This network uses NAT to translate from our ISP's network of 10.128.250.0/24 to 
 
 | Device           | Interface            | IP Address        | Subnet Mask     | Default Gateway   | Role/Notes                                      |
 | :--------------- | :------------------- | :---------------- | :-------------- | :---------------- | :---------------------------------------------- |
-| **Gateway-Router** | GigabitEthernet0/0/1 | 10.128.209.2      | 255.255.255.0   | 10.128.209.1      | Connection to ISP (Outside NAT)                 |
-|                  | GigabitEthernet0/0.10| 192.168.1.165     | 255.255.255.224 | N/A (Router)      | Management VLAN (VLAN 10) - HSRP Active         |
-|                  | GigabitEthernet0/0.20| 192.168.1.133     | 255.255.255.224 | N/A (Router)      | IT VLAN (VLAN 20) - HSRP Active                 |
-|                  | GigabitEthernet0/0.30| 192.168.1.5       | 255.255.255.240 | N/A (Router)      | Employees VLAN (VLAN 30) - HSRP Active          |
-|                  | GigabitEthernet0/0.50| 192.168.1.69      | 255.255.255.240 | N/A (Router)      | Wireless VLAN (VLAN 50) - HSRP Active           |
-| **Backup-Router**| GigabitEthernet0/0/1 | 10.128.209.3      | 255.255.255.0   | 10.128.209.1      | Connection to ISP (Outside NAT)                 |
-|                  | GigabitEthernet0/0.10| 192.168.1.167     | 255.255.255.224 | N/A (Router)      | Management VLAN (VLAN 10) - HSRP Standby        |
-|                  | GigabitEthernet0/0.20| 192.168.1.135     | 255.255.255.224 | N/A (Router)      | IT VLAN (VLAN 20) - HSRP Standby                |
-|                  | GigabitEthernet0/0.30| 192.168.1.7       | 255.255.255.240 | N/A (Router)      | Employees VLAN (VLAN 30) - HSRP Standby         |
-|                  | GigabitEthernet0/0.50| 192.168.1.71      | 255.255.255.240 | N/A (Router)      | Wireless VLAN (VLAN 50) - HSRP Standby          |
+| **Gateway-Router** | GigabitEthernet0/1   | 10.128.209.2      | 255.255.255.0   | 10.128.209.1      | Connection to ISP (Outside NAT)                 |
+|                  | GigabitEthernet0/0.10| 192.168.0.1       | 255.255.255.224 | N/A (Router)      | HR/Management VLAN (VLAN 10) - HSRP Active      |
+|                  | GigabitEthernet0/0.20| 192.168.0.33      | 255.255.255.224 | N/A (Router)      | IT VLAN (VLAN 20) - HSRP Active                 |
+|                  | GigabitEthernet0/0.30| 192.168.0.65      | 255.255.255.224 | N/A (Router)      | Employees VLAN (VLAN 30) - HSRP Active          |
+|                  | GigabitEthernet0/0.40| 192.168.0.97      | 255.255.255.224 | N/A (Router)      | Servers VLAN (VLAN 40) - HSRP Active            |
+|                  | GigabitEthernet0/0.50| 192.168.1.1       | 255.255.255.0   | N/A (Router)      | Wireless VLAN (VLAN 50) - HSRP Active           |
+| **Backup-Router**| GigabitEthernet0/1   | 10.128.209.3      | 255.255.255.0   | 10.128.209.1      | Connection to ISP (Outside NAT)                 |
+|                  | GigabitEthernet0/0.10| 192.168.0.3       | 255.255.255.224 | N/A (Router)      | HR/Management VLAN (VLAN 10) - HSRP Standby     |
+|                  | GigabitEthernet0/0.20| 192.168.0.35      | 255.255.255.224 | N/A (Router)      | IT VLAN (VLAN 20) - HSRP Standby                |
+|                  | GigabitEthernet0/0.30| 192.168.0.67      | 255.255.255.224 | N/A (Router)      | Employees VLAN (VLAN 30) - HSRP Standby         |
+|                  | GigabitEthernet0/0.40| 192.168.0.99      | 255.255.255.224 | N/A (Router)      | Servers VLAN (VLAN 40) - HSRP Standby           |
+|                  | GigabitEthernet0/0.50| 192.168.1.3       | 255.255.255.0   | N/A (Router)      | Wireless VLAN (VLAN 50) - HSRP Standby          |
 | **HSRP Virtual IPs** |                  |                   |                 |                   | (These are the Default Gateways for Clients)    |
-|                  | VLAN 10 (Mgmt)     | 192.168.1.166     | 255.255.255.224 | N/A (VIP)         | Clients in Management VLAN use this as DG       |
-|                  | VLAN 20 (IT)       | 192.168.1.134     | 255.255.255.224 | N/A (VIP)         | Clients in IT VLAN use this as DG               |
-|                  | VLAN 30 (Employees)| 192.168.1.6       | 255.255.255.240 | N/A (VIP)         | Clients in Employees VLAN use this as DG        |
-|                  | VLAN 50 (Wireless) | 192.168.1.70      | 255.255.255.240 | N/A (VIP)         | Clients in Wireless VLAN use this as DG         |
-| **Switch-1** | Vlan 10            | 192.168.1.169     | 255.255.255.224 | 192.168.1.166     | Switch Management IP (for remote access/ping)   |
-| **Switch-2** | Vlan 10            | 192.168.1.170     | 255.255.255.224 | 192.168.1.166     | Switch Management IP (for remote access/ping)   |
+|                  | VLAN 10 (HR/Mgmt)  | 192.168.0.2       | 255.255.255.224 | N/A (VIP)         | Clients in HR/Management VLAN use this as DG    |
+|                  | VLAN 20 (IT)       | 192.168.0.34      | 255.255.255.224 | N/A (VIP)         | Clients in IT VLAN use this as DG               |
+|                  | VLAN 30 (Employees)| 192.168.0.66      | 255.255.255.224 | N/A (VIP)         | Clients in Employees VLAN use this as DG        |
+|                  | VLAN 40 (Servers)  | 192.168.0.98      | 255.255.255.224 | N/A (VIP)         | Servers in Servers VLAN use this as DG          |
+|                  | VLAN 50 (Wireless) | 192.168.1.2       | 255.255.255.0   | N/A (VIP)         | Clients in Wireless VLAN use this as DG         |
+| **Switch-1** | VLAN 20            | 192.168.0.37       | 255.255.255.224 | 192.168.0.34       | Switch Management IP                            |
+| **Switch-2** | VLAN 20            | 192.168.0.38       | 255.255.255.224 | 192.168.0.34       | Switch Management IP                            |
 | **ISP Router** | Assumed            | 10.128.209.1      | 255.255.255.0   | N/A               | Your internet gateway                           |
-| **End Devices** |                  |                   |                 |                   |                                                 |
-| Management PC    | Ethernet           | 192.168.1.168     | 255.255.255.224 | 192.168.1.166     | Example PC in Management VLAN                   |
-| IT PC/Server     | Ethernet           | 192.168.1.136     | 255.255.255.224 | 192.168.1.134     | Example PC/Server in IT VLAN                    |
-| Employees PC     | Ethernet           | 192.168.1.8       | 255.255.255.240 | 192.168.1.6       | Example PC in Employees VLAN                    |
-| Wireless Access Point | Ethernet/Wireless  | 192.168.1.71      | 255.255.255.240 | 192.168.1.70      | Example Wireless Access Point in Wireless VLAN     |
+| **End Devices (Examples)** |                    |                   |                 |                   | (DHCP configured, these would be assigned)      |
+| Management PC    | Ethernet           | 192.168.0.10      | 255.255.255.224 | 192.168.0.2       | Example PC in HR/Management VLAN                |
+| IT PC/Server     | Ethernet           | 192.168.0.40      | 255.255.255.224 | 192.168.0.34      | Example PC/Server in IT VLAN                    |
+| Employees PC     | Ethernet           | 192.168.0.70      | 255.255.255.224 | 192.168.0.66      | Example PC in Employees VLAN                    |
+| AD DS/DNS/DHCP Server   | Ethernet           | 192.168.0.100     | 255.255.255.224 | 192.168.0.98      | Example Server in Servers VLAN                  |
+| Email/Web Service Server   | Ethernet           | 192.168.0.101     | 255.255.255.224 | 192.168.0.98      | Example Server in Servers VLAN                  |
+| Backup Server   | Ethernet           | 192.168.0.102     | 255.255.255.224 | 192.168.0.98      | Example Server in Servers VLAN                  |
+| Server Example   | Ethernet           | 192.168.0.103+     | 255.255.255.224 | 192.168.0.98      | Example Server in Servers VLAN                  |
+| Wireless Access Point | Ethernet/Wireless  | 192.168.1.10      | 255.255.255.0   | 192.168.1.2       | Example Wireless device/AP in Wireless VLAN     |
 ## Running-Configs
 These are the running-configs for the devices used:
 
@@ -52,105 +59,12 @@ These are the running-configs for the devices used:
 ### Switch 1 Configuration
 
 ### Switch 2 Configuration 
-version 15.0  
-no service pad  
-service timestamps debug datetime msec  
-service timestamps log datetime msec  
-no service password-encryption  
-hostname Switch-2  
-boot-start-marker  
-boot-end-marker  
-no aaa new-model
-system mtu routing 1500  
-spanning-tree mode pvst  
-spanning-tree extend system-id  
-vlan internal allocation policy ascending  
-interface Port-channel1  
-interface FastEthernet0/1  
- switchport access vlan 20  
- switchport mode access  
-interface FastEthernet0/2  
- switchport access vlan 20  
- switchport mode access  
-interface FastEthernet0/3  
- switchport access vlan 20  
- switchport mode access  
-interface FastEthernet0/4  
- switchport access vlan 20  
- switchport mode access  
-interface FastEthernet0/5  
- switchport access vlan 20  
- switchport mode access  
-interface FastEthernet0/6  
- switchport access vlan 20  
- switchport mode access  
-interface FastEthernet0/7  
- switchport access vlan 20  
- switchport mode access  
-interface FastEthernet0/8  
- switchport access vlan 20  
- switchport mode access  
-interface FastEthernet0/9  
- switchport access vlan 20  
- switchport mode access  
-interface FastEthernet0/10  
- switchport access vlan 20  
- switchport mode access  
-interface FastEthernet0/11  
- switchport access vlan 20  
- switchport mode access  
-interface FastEthernet0/12  
- switchport access vlan 20  
- switchport mode access  
-interface FastEthernet0/13  
- switchport access vlan 50  
- switchport mode access  
-interface FastEthernet0/14  
- switchport access vlan 50  
- switchport mode access  
- interface FastEthernet0/15  
- switchport access vlan 50  
- switchport mode access  
-interface FastEthernet0/16  
- switchport access vlan 50  
- switchport mode access  
-interface FastEthernet0/17  
- switchport access vlan 50  
- switchport mode access  
-interface FastEthernet0/18  
- switchport access vlan 50  
- switchport mode access  
-interface FastEthernet0/19  
- switchport access vlan 50  
- switchport mode access  
-interface FastEthernet0/20  
- switchport access vlan 50  
- switchport mode access  
-interface FastEthernet0/21  
- switchport access vlan 50  
- switchport mode access  
-interface FastEthernet0/22  
- switchport access vlan 50  
- switchport mode access  
-interface FastEthernet0/23  
- switchport mode trunk  
- channel-group 1 mode active  
-interface FastEthernet0/24  
- switchport mode trunk  
- channel-group 1 mode active  
-interface GigabitEthernet0/1  
- switchport mode trunk  
-interface GigabitEthernet0/2  
-interface Vlan1  
- no ip address  
- shutdown  
-interface Vlan10  
- ip address 192.168.1.170 255.255.255.224  
-ip default-gateway 192.168.1.166  
-ip http server  
-ip http secure-server  
-line con 0  
-line vty 5 15  
+
 ## Server and Service Configurations
 
 ## Passwords Management
+
+ 
+**DNS Server/DHCP Server/Active Directory Domain Services IP:** 192.168.0.100  
+**Email Server/Web Service IP:** 192.168.0.101  
+**Backup Server IP:** 192.168.0.102  
