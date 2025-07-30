@@ -63,8 +63,3 @@ These are the running-configs for the devices used:
 ## Server and Service Configurations
 
 ## Passwords Management
-
- 
-**DNS Server/DHCP Server/Active Directory Domain Services IP:** 192.168.0.100  
-**Email Server/Web Service IP:** 192.168.0.101  
-**Backup Server IP:** 192.168.0.102  
