@@ -12,7 +12,7 @@ This documentation represents our ideas for a small-scale company's network made
 <img width="2254" height="1351" alt="Office Floor Plan (3)" src="https://github.com/user-attachments/assets/98cadee3-954e-4c67-9919-f867000e5d02" />
 
 ## Logical Network Topology
-<img width="4560" height="2620" alt="Network Topology (3)" src="https://github.com/user-attachments/assets/1c4cf531-12f4-4f5a-a702-b641edb5d987" />
+<img width="4560" height="2620" alt="Network Topology (4)" src="https://github.com/user-attachments/assets/4103502a-d1af-441a-9a88-b2f7c1de85e6" />
 
 ## Addressing Table
 This network uses NAT to translate from our ISP's network of 10.128.250.0/24 to our network of 192.168.0.0/16.
@@ -23,22 +23,15 @@ This network uses NAT to translate from our ISP's network of 10.128.250.0/24 to 
 | :--------------- | :------------------- | :---------------- | :-------------- | :---------------- | :---------------------------------------------- |
 |                  |                      |                   |                 |                   |                                                 |
 | **ISP Router** | GigabitEthernet0/1            | 10.128.209.1      | 255.255.255.0   | N/A               | Your internet gateway                           |
-| **ISP Link** | ASA Outside Interface (`Gig1/8`)    | `10.128.209.10 /24`              | Connected to ISP Router (`10.128.209.1`)                      |
 |                       |                                     |                                  |                                                               |
-| **ASA-Router Transit Link** |                               | `10.128.210.0 /29`               | New dedicated subnet between ASA and Routers (via Transit Switch) |
-|                       | ASA Inside Interface (`Gig1/1`)     | `10.128.210.1 /29`               |                                                               |
-|                       | Gateway Router External (`Gig0/1`)  | `10.128.210.2 /29`               |                                                               |
-|                       | Backup Router External (`Gig0/1`)   | `10.128.210.3 /29`               |                                                               |
-|                       | Transit Switch (for connectivity)   | *No IP in this VLAN *            | Connects ASA `G0/1`, GR `G0/1`, BR `G0/1`                     |
-|                       |                                     |                                  |                                                               |
-| **Gateway-Router** | GigabitEthernet0/1   | 10.128.210.2      | 255.255.255.0   | 10.128.210.1      | Connection to ISP (Outside NAT)                 |
+| **Gateway-Router** | GigabitEthernet0/1   | 10.128.209.2      | 255.255.255.0   | 10.128.209.1      | Connection to ISP (Outside NAT)                 |
 |                  | GigabitEthernet0/0.10| 192.168.0.1       | 255.255.255.224 | N/A (Router)      | HR/Management VLAN (VLAN 10) - HSRP Active      |
 |                  | GigabitEthernet0/0.20| 192.168.0.33      | 255.255.255.224 | N/A (Router)      | IT VLAN (VLAN 20) - HSRP Active                 |
 |                  | GigabitEthernet0/0.30| 192.168.0.65      | 255.255.255.224 | N/A (Router)      | Employees VLAN (VLAN 30) - HSRP Active          |
 |                  | GigabitEthernet0/0.40| 192.168.0.97      | 255.255.255.224 | N/A (Router)      | Servers VLAN (VLAN 40) - HSRP Active            |
 |                  | GigabitEthernet0/0.50| 192.168.1.1       | 255.255.255.0   | N/A (Router)      | Wireless VLAN (VLAN 50) - HSRP Active           |
 |                       |                                     |                                  |                                                               |
-| **Backup-Router**| GigabitEthernet0/1   | 10.128.210.3      | 255.255.255.0   | 10.128.210.1      | Connection to ISP (Outside NAT)                 |
+| **Backup-Router**| GigabitEthernet0/1   | 10.128.209.3      | 255.255.255.0   | 10.128.209.1      | Connection to ISP (Outside NAT)                 |
 |                  | GigabitEthernet0/0.10| 192.168.0.3       | 255.255.255.224 | N/A (Router)      | HR/Management VLAN (VLAN 10) - HSRP Standby     |
 |                  | GigabitEthernet0/0.20| 192.168.0.35      | 255.255.255.224 | N/A (Router)      | IT VLAN (VLAN 20) - HSRP Standby                |
 |                  | GigabitEthernet0/0.30| 192.168.0.67      | 255.255.255.224 | N/A (Router)      | Employees VLAN (VLAN 30) - HSRP Standby         |
