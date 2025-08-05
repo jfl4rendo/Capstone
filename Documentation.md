@@ -15,7 +15,7 @@ This documentation represents our ideas for a small-scale company's network made
 <img width="4560" height="2620" alt="Network Topology (4)" src="https://github.com/user-attachments/assets/4103502a-d1af-441a-9a88-b2f7c1de85e6" />
 
 ## Addressing Table
-This network uses NAT to translate from our ISP's network of 10.128.250.0/24 to our network of 192.168.0.0/16.
+This network uses NAT to translate from our ISP's network of 10.128.209.0/24 to our network of 192.168.0.0/23.
 
 ### Network Addressing Table
 
@@ -58,7 +58,7 @@ This network uses NAT to translate from our ISP's network of 10.128.250.0/24 to 
 | Server Example   | Ethernet           | 192.168.0.104+     | 255.255.255.224 | 192.168.0.98      | Example Server in Servers VLAN                  |
 | Wireless Access Point | Ethernet/Wireless  | 192.168.1.10      | 255.255.255.0   | 192.168.1.2       | Wireless AP in Wireless VLAN     |
 ## Running-Configs
-These are the running-configs for the devices used:
+These are the configurations for the routers and switches that were used:
 
 ### Gateway Router Configuration
 
@@ -76,6 +76,17 @@ These are the running-configs for the devices used:
 * Email Server  
 
 ## Passwords Management
-* Bitwarden  
-* Microsoft Entra ID  
-* Microsoft Sentinel
+
+When it comes to password management, we would be using Bitwarden, Microsoft Entra ID, and Microsoft Sentinel to create a robust and secure system. Their synergy focuses on centralizing identities, enforcing strong policies, and actively monitoring for threats.
+
+### Centralized Identity and Policy Enforcement
+
+* **Microsoft Entra ID** is the foundation, acting as the primary identity provider for your organization. It ensures that every user has a unique, centrally managed account. You can enforce your organization's security policies, such as Multi-Factor Authentication (MFA) and conditional access rules, directly within Entra ID.
+* **Bitwarden** integrates with Entra ID through Single Sign-On (SSO). This means employees use their Entra ID credentials and MFA to access their secure Bitwarden vaults. You don't have to manage a separate set of identities for the password manager itself. This also means if a user leaves the company and their Entra ID account is disabled, they automatically lose access to their Bitwarden vault.
+
+### Threat Monitoring and Automated Response
+
+* **Microsoft Sentinel** is the security nerve center. It pulls in logs from both Bitwarden and Entra ID to monitor for suspicious activity.
+* **Entra ID's logs** provide Sentinel with a stream of authentication events, allowing it to detect threats like unusual login locations, multiple failed sign-in attempts, or attempts to bypass MFA.
+* **Bitwarden's logs** add a critical layer of visibility by showing how users are interacting with their stored passwords. For example, Sentinel can be configured to alert if a user who logged in from an unusual location suddenly accesses a large number of sensitive credentials in a short period. This correlation is a powerful way to identify a compromised account.
+* If Sentinel detects a high-risk event, it can trigger an automated response. For instance, a playbook could be configured to immediately disable a user's Entra ID account and force a password reset for their Bitwarden vault, effectively neutralizing the threat.
