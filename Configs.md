@@ -71,44 +71,6 @@ ip nat inside source list 1 interface GigabitEthernet0/1 overload
 // --- Default Route to ISP ---
 ip route 0.0.0.0 0.0.0.0 10.128.209.1
 
-// --- DHCP Pools (DNS server at 192.168.0.100 - your primary AD/DNS server) ---
-// Exclude router IPs, HSRP VIPs, static server IPs, and switch management IPs
-ip dhcp excluded-address 192.168.0.1 192.168.0.10     // HR/Management static/reserved (includes router, HSRP, switch mgmt)
-ip dhcp excluded-address 192.168.0.33 192.168.0.40     // IT static/reserved
-ip dhcp excluded-address 192.168.0.65 192.168.0.75     // Employees static/reserved
-ip dhcp excluded-address 192.168.0.97 192.168.0.105    // Servers static/reserved (e.g., your AD/DNS server at .100)
-ip dhcp excluded-address 192.168.1.1 192.168.1.10     // Wireless static/reserved (e.g., for APs)
-
-ip dhcp pool MANAGEMENT_POOL
- network 192.168.0.0 255.255.255.224
- default-router 192.168.0.2
- dns-server 192.168.0.100
- lease 8
-
-ip dhcp pool IT_POOL
- network 192.168.0.32 255.255.255.224
- default-router 192.168.0.34
- dns-server 192.168.0.100
- lease 8
-
-ip dhcp pool EMPLOYEES_POOL
- network 192.168.0.64 255.255.255.224
- default-router 192.168.0.66
- dns-server 192.168.0.100
- lease 8
-
-ip dhcp pool SERVERS_POOL
- network 192.168.0.96 255.255.255.224
- default-router 192.168.0.98
- dns-server 192.168.0.100
- lease 8
-
-ip dhcp pool WIRELESS_POOL
- network 192.168.1.0 255.255.255.0
- default-router 192.168.1.2
- dns-server 192.168.0.100
- lease 8
-
 Backup-Router
 
 // --- ISP Interface ---
