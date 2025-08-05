@@ -52,11 +52,10 @@ This network uses NAT to translate from our ISP's network of 10.128.250.0/24 to 
 | Management PC    | Ethernet           | 192.168.0.10      | 255.255.255.224 | 192.168.0.2       | Example PC in HR/Management VLAN                |
 | IT PC     | Ethernet           | 192.168.0.40      | 255.255.255.224 | 192.168.0.34      | Example PC in IT VLAN                    |
 | Employees PC     | Ethernet           | 192.168.0.70      | 255.255.255.224 | 192.168.0.66      | Example PC in Employees VLAN                    |
-| AD DS/DNS/DHCP Server   | Ethernet           | 192.168.0.100     | 255.255.255.224 | 192.168.0.98      |  AD DS/DNS/DHCP Server in Servers VLAN                  |
-| Email/Web Service Server   | Ethernet           | 192.168.0.101     | 255.255.255.224 | 192.168.0.98      | Email/Web Service Server in Servers VLAN                  |
-| File Server   | Ethernet           | 192.168.0.102     | 255.255.255.224 | 192.168.0.98      | File Server in Servers VLAN                  |
-| Backup Server   | Ethernet           | 192.168.0.103     | 255.255.255.224 | 192.168.0.98      | Backup Server in Servers VLAN                  |
-| Server Example   | Ethernet           | 192.168.0.103+     | 255.255.255.224 | 192.168.0.98      | Example Server in Servers VLAN                  |
+| AD DS/DNS/DHCP Server   | Ethernet           | 192.168.0.101     | 255.255.255.224 | 192.168.0.98      |  AD DS/DNS/DHCP Server in Servers VLAN                  |
+| File/Backup Server   | Ethernet           | 192.168.0.102     | 255.255.255.224 | 192.168.0.98      | File/Backup Server in Servers VLAN                  |
+| Email/Web Service Server   | Ethernet           | 192.168.0.103     | 255.255.255.224 | 192.168.0.98      | Email/Web Service Server in Servers VLAN                  |
+| Server Example   | Ethernet           | 192.168.0.104+     | 255.255.255.224 | 192.168.0.98      | Example Server in Servers VLAN                  |
 | Wireless Access Point | Ethernet/Wireless  | 192.168.1.10      | 255.255.255.0   | 192.168.1.2       | Wireless AP in Wireless VLAN     |
 ## Running-Configs
 These are the running-configs for the devices used:
@@ -70,16 +69,13 @@ These are the running-configs for the devices used:
 ### Switch 2 Configuration 
 
 ## Server and Service Configurations
-
-## ACLs
-IT: Everything  
-Server: Everything  
-Employees:  
-Management:  
-Wireless:  
+* Active Directory Domain Services  
+* DNS Server  
+* DHCP Server  
+* File Server  
+* Email Server  
 
 ## Passwords Management
-For our 
 * Bitwarden  
 * Microsoft Entra ID  
 * Microsoft Sentinel
