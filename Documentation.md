@@ -45,18 +45,19 @@ This network uses NAT to translate from our ISP's network of 10.128.250.0/24 to 
 |                  | VLAN 40 (Servers)  | 192.168.0.98      | 255.255.255.224 | N/A (VIP)         | Servers in Servers VLAN use this as DG          |
 |                  | VLAN 50 (Wireless) | 192.168.1.2       | 255.255.255.0   | N/A (VIP)         | Clients in Wireless VLAN use this as DG         |
 |                       |                                     |                                  |                                                               |
-| **Switch-1** | VLAN 20            | 192.168.0.37       | 255.255.255.224 | 192.168.0.34       | Switch Management IP                            |
-| **Switch-2** | VLAN 20            | 192.168.0.38       | 255.255.255.224 | 192.168.0.34       | Switch Management IP                            |
+| **Switch-1** | VLAN 20            | 192.168.0.37       | 255.255.255.224 | 192.168.0.34       | Switch IP on IT VLAN                            |
+| **Switch-2** | VLAN 20            | 192.168.0.38       | 255.255.255.224 | 192.168.0.34       | Switch IP on IT VLAN                            |
+|                       |                                     |                                  |                                                               |
 | **End Devices (Examples)** |                    |                   |                 |                   | (DHCP configured, these would be assigned)      |
 | Management PC    | Ethernet           | 192.168.0.10      | 255.255.255.224 | 192.168.0.2       | Example PC in HR/Management VLAN                |
-| IT PC/Server     | Ethernet           | 192.168.0.40      | 255.255.255.224 | 192.168.0.34      | Example PC/Server in IT VLAN                    |
+| IT PC     | Ethernet           | 192.168.0.40      | 255.255.255.224 | 192.168.0.34      | Example PC in IT VLAN                    |
 | Employees PC     | Ethernet           | 192.168.0.70      | 255.255.255.224 | 192.168.0.66      | Example PC in Employees VLAN                    |
 | AD DS/DNS/DHCP Server   | Ethernet           | 192.168.0.100     | 255.255.255.224 | 192.168.0.98      |  AD DS/DNS/DHCP Server in Servers VLAN                  |
 | Email/Web Service Server   | Ethernet           | 192.168.0.101     | 255.255.255.224 | 192.168.0.98      | Email/Web Service Server in Servers VLAN                  |
 | File Server   | Ethernet           | 192.168.0.102     | 255.255.255.224 | 192.168.0.98      | File Server in Servers VLAN                  |
 | Backup Server   | Ethernet           | 192.168.0.103     | 255.255.255.224 | 192.168.0.98      | Backup Server in Servers VLAN                  |
 | Server Example   | Ethernet           | 192.168.0.103+     | 255.255.255.224 | 192.168.0.98      | Example Server in Servers VLAN                  |
-| Wireless Access Point | Ethernet/Wireless  | 192.168.1.10      | 255.255.255.0   | 192.168.1.2       | Example Wireless device/AP in Wireless VLAN     |
+| Wireless Access Point | Ethernet/Wireless  | 192.168.1.10      | 255.255.255.0   | 192.168.1.2       | Wireless AP in Wireless VLAN     |
 ## Running-Configs
 These are the running-configs for the devices used:
 
@@ -69,6 +70,13 @@ These are the running-configs for the devices used:
 ### Switch 2 Configuration 
 
 ## Server and Service Configurations
+
+## ACLs
+IT: Everything  
+Server: Everything  
+Employees:  
+Management:  
+Wireless:  
 
 ## Passwords Management
 For our 
