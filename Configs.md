@@ -156,19 +156,16 @@ name Wireless
 // --- Trunk Port for Gateway Router Connection (G0/1) ---
 interface GigabitEthernet0/1
 switchport mode trunk
-switchport trunk encapsulation dot1q
 no shutdown
 
 // --- Inter-Switch Trunk (EtherChannel to Switch-2) ---
 interface Port-channel 1
 switchport mode trunk
-switchport trunk encapsulation dot1q
 no shutdown
 
 interface range FastEthernet0/23, FastEthernet0/24
 channel-group 1 mode active
 switchport mode trunk
-switchport trunk encapsulation dot1q
 no shutdown
 
 // --- Configure Access Ports for End Devices ---
@@ -210,19 +207,16 @@ name Wireless
 // --- Trunk Port for Backup Router Connection (G0/1) ---
 interface GigabitEthernet0/1
 switchport mode trunk
-switchport trunk encapsulation dot1q
 no shutdown
 
 // --- Inter-Switch Trunk (EtherChannel to Switch-1) ---
 interface Port-channel 1
 switchport mode trunk
-switchport trunk encapsulation dot1q
 no shutdown
 
 interface range FastEthernet0/23, FastEthernet0/24
 channel-group 1 mode active
 switchport mode trunk
-switchport trunk encapsulation dot1q
 no shutdown
 
 // --- Configure Access Ports for End Devices ---
