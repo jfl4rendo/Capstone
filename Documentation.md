@@ -12,7 +12,7 @@ This documentation represents our ideas for a small-scale company's network made
 <img width="2254" height="1351" alt="Office Floor Plan (3)" src="https://github.com/user-attachments/assets/98cadee3-954e-4c67-9919-f867000e5d02" />
 
 ## Logical Network Topology
-<img width="4560" height="2620" alt="Network Topology (4)" src="https://github.com/user-attachments/assets/4103502a-d1af-441a-9a88-b2f7c1de85e6" />
+<img width="4560" height="2800" alt="Network Topology (5)" src="https://github.com/user-attachments/assets/710a5bce-f620-48c0-afc2-34dd39b55b76" />
 
 ## Addressing Table
 This network uses NAT to translate from our ISP's network of 10.128.209.0/24 to our network of 192.168.0.0/23.
