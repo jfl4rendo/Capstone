@@ -310,3 +310,248 @@ When it comes to password management, we would be using Bitwarden, Microsoft Ent
 * **Entra ID's logs** provide Sentinel with a stream of authentication events, allowing it to detect threats like unusual login locations, multiple failed sign-in attempts, or attempts to bypass MFA.
 * **Bitwarden's logs** add a critical layer of visibility by showing how users are interacting with their stored passwords. For example, Sentinel can be configured to alert if a user who logged in from an unusual location suddenly accesses a large number of sensitive credentials in a short period. This correlation is a powerful way to identify a compromised account.
 * If Sentinel detects a high-risk event, it can trigger an automated response. For instance, a playbook could be configured to immediately disable a user's Entra ID account and force a password reset for their Bitwarden vault, effectively neutralizing the threat.
+
+
+
+
+
+
+10 HR
+20 IT
+30 Employees
+40 Servers
+50 Wireless
+80 Firewall
+99 Native
+100 Management
+
+hostname Gateway-Router
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable secret 5 $1$Gpn.$7Pm/JU43Rb5XYLMK6SOf.1
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip cef
+login block-for 120 attempts 5 within 30
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+cts logging verbose
+!
+!
+license udi pid CISCO2901/K9 sn FJC2037A0Q4
+license boot module c2900 technology-package securityk9
+!
+!
+username admin privilege 15 secret 5 $1$SKb6$96D2wpEZffuRA7Nj9bj4V.
+!
+redundancy
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Embedded-Service-Engine0/0
+ no ip address
+ shutdown
+!
+interface GigabitEthernet0/0
+ no ip address
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/0.10
+ encapsulation dot1Q 10
+ ip address 192.168.10.1 255.255.255.0
+ ip helper-address 192.168.40.101
+ ip ospf 1 area 0
+ vrrp 10 ip 192.168.10.11
+ no cdp enable
+!
+interface GigabitEthernet0/0.20
+ encapsulation dot1Q 20
+ ip address 192.168.20.1 255.255.255.0
+ ip helper-address 192.168.40.101
+ ip ospf 1 area 0
+ vrrp 20 ip 192.168.20.11
+ no cdp enable
+!
+interface GigabitEthernet0/0.30
+ encapsulation dot1Q 30
+ ip address 192.168.30.1 255.255.255.0
+ ip helper-address 192.168.40.101
+ ip ospf 1 area 0
+ vrrp 30 ip 192.168.30.11
+!
+interface GigabitEthernet0/0.40
+ encapsulation dot1Q 40
+ ip address 192.168.40.1 255.255.255.0
+ ip helper-address 192.168.40.101
+ ip ospf 1 area 0
+ vrrp 40 ip 192.168.40.11
+!
+interface GigabitEthernet0/0.50
+ encapsulation dot1Q 50
+ ip address 192.168.50.1 255.255.255.0
+ ip helper-address 192.168.40.101
+ ip ospf 1 area 0
+ vrrp 50 ip 192.168.50.11
+!
+interface GigabitEthernet0/0.99
+ encapsulation dot1Q 99 native
+ ip address 192.168.99.1 255.255.255.0
+ ip ospf 1 area 0
+ vrrp 99 ip 192.168.99.11
+!
+interface GigabitEthernet0/0.100
+ encapsulation dot1Q 100
+ ip address 192.168.100.1 255.255.255.0
+ ip ospf 1 area 0
+ vrrp 100 ip 192.168.100.11
+!
+interface GigabitEthernet0/1
+ ip address 192.168.80.2 255.255.255.0
+ ip ospf 1 area 0
+ duplex auto
+ speed auto
+!
+interface Serial0/0/0
+ no ip address
+ shutdown
+ clock rate 2000000
+!
+interface Serial0/0/1
+ no ip address
+ shutdown
+ clock rate 2000000
+!
+router ospf 1
+ router-id 1.1.1.1
+ network 192.168.10.0 0.0.0.255 area 0
+ network 192.168.20.0 0.0.0.255 area 0
+ network 192.168.30.0 0.0.0.255 area 0
+ network 192.168.40.0 0.0.0.255 area 0
+ network 192.168.50.0 0.0.0.255 area 0
+ network 192.168.80.0 0.0.0.255 area 0
+ network 192.168.99.0 0.0.0.255 area 0
+ network 192.168.100.0 0.0.0.255 area 0
+ default-information originate always
+!
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!
+ip route 0.0.0.0 0.0.0.0 192.168.80.1
+!
+!
+!
+!
+!
+control-plane
+!
+!
+!
+line con 0
+ exec-timeout 5 0
+ password 7 0236051F4F115F3348
+ logging synchronous
+ login local
+line aux 0
+line 2
+ no activation-character
+ no exec
+ transport preferred none
+ transport output pad telnet rlogin lapb-ta mop udptn v120 ssh
+ stopbits 1
+line vty 0 4
+ exec-timeout 5 0
+ login local
+ transport input ssh
+!
+scheduler allocate 20000 1000
+!
+end
+
+interface FastEthernet0/23
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 10,20,30,40,50,99,100
+ switchport mode trunk
+ channel-group 1 mode active
+!
+interface FastEthernet0/24
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 10,20,30,40,50,99,100
+ switchport mode trunk
+ channel-group 1 mode active
+!
+interface GigabitEthernet0/1
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 10,20,30,40,50,99,100
+ switchport mode trunk
+!
+interface GigabitEthernet0/2
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan100
+ ip address 192.168.100.4 255.255.255.0
+!
+ip default-gateway 192.168.100.11
+ip http server
+ip http secure-server
+!
+!
+line con 0
+line vty 5 15
+!
+end
+
+Switch-2#show int trunk
+
+Port        Mode             Encapsulation  Status        Native vlan
+Gi0/1       on               802.1q         trunking      99
+Po1         on               802.1q         trunking      99
+
+Port        Vlans allowed on trunk
+Gi0/1       10,20,30,40,50,99-100
+Po1         10,20,30,40,50,99-100
+
+Port        Vlans allowed and active in management domain
+Gi0/1       10,20,30,40,50,99-100
+Po1         10,20,30,40,50,99-100
+
+Port        Vlans in spanning tree forwarding state and not pruned
+Gi0/1       10,20,30,40,50,99-100
+Po1         10,20,30,40,50,99-100
