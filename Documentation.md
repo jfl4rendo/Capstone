@@ -22,31 +22,38 @@ This network uses NAT to translate from our ISP's network of 10.128.209.0/24 to 
 | Device           | Interface            | IP Address        | Subnet Mask     | Default Gateway   | Role/Notes                                      |
 | :--------------- | :------------------- | :---------------- | :-------------- | :---------------- | :---------------------------------------------- |
 |                  |                      |                   |                 |                   |                                                 |
-| **ISP Router** | GigabitEthernet0/1            | 10.128.209.1      | 255.255.255.0   | N/A               | Your internet gateway                           |
+| **ISP Firewall** | GigabitEthernet0/1            | 10.128.209.x (DHCP)      | 255.255.255.0   | N/A               | Connection to ISP                 |
+|                  | GigabitEthernet0/1            | 192.168.80.1      | 255.255.255.0   | N/A               |Internet gateway                     |
 |                       |                                     |                                  |                                                               |
-| **Gateway-Router** | GigabitEthernet0/1   | 10.128.209.2      | 255.255.255.0   | 10.128.209.1      | Connection to ISP (Outside NAT)                 |
-|                  | GigabitEthernet0/0.10| 192.168.10.1       | 255.255.255.0 | N/A (Router)      | HR/Management VLAN (VLAN 10) - HSRP Active      |
+| **Gateway-Router** | GigabitEthernet0/1   | 192.168.80.2      | 255.255.255.0   | N/A      | Connection to ISP Firewall                |
+|                  | GigabitEthernet0/0.10| 192.168.10.1       | 255.255.255.0 | N/A (Router)      | HR VLAN (VLAN 10) - HSRP Active      |
 |                  | GigabitEthernet0/0.20| 192.168.20.1      | 255.255.255.0 | N/A (Router)      | IT VLAN (VLAN 20) - HSRP Active                 |
 |                  | GigabitEthernet0/0.30| 192.168.30.1      | 255.255.255.0 | N/A (Router)      | Employees VLAN (VLAN 30) - HSRP Active          |
 |                  | GigabitEthernet0/0.40| 192.168.40.1      | 255.255.255.0 | N/A (Router)      | Servers VLAN (VLAN 40) - HSRP Active            |
 |                  | GigabitEthernet0/0.50| 192.168.50.1       | 255.255.255.0   | N/A (Router)      | Wireless VLAN (VLAN 50) - HSRP Active           |
+|                  | GigabitEthernet0/0.99| 192.168.99.1       | 255.255.255.0   | N/A (Router)      | Native VLAN (VLAN 99) - HSRP Active           |
+|                  | GigabitEthernet0/0.100| 192.168.100.1       | 255.255.255.0   | N/A (Router)      | Management VLAN (VLAN 100) - HSRP Active           |
 |                       |                                     |                                  |                                                               |
-| **Backup-Router**| GigabitEthernet0/1   | 10.128.209.3      | 255.255.255.0   | 10.128.209.1      | Connection to ISP (Outside NAT)                 |
-|                  | GigabitEthernet0/0.10| 192.168.10.2       | 255.255.255.0 | N/A (Router)      | HR/Management VLAN (VLAN 10) - HSRP Standby     |
+| **Backup-Router**| GigabitEthernet0/1   | 192.168.80.3      | 255.255.255.0   | N/A      | Connection to ISP Firewall                |
+|                  | GigabitEthernet0/0.10| 192.168.10.2       | 255.255.255.0 | N/A (Router)      | HR VLAN (VLAN 10) - HSRP Standby     |
 |                  | GigabitEthernet0/0.20| 192.168.20.2      | 255.255.255.0 | N/A (Router)      | IT VLAN (VLAN 20) - HSRP Standby                |
 |                  | GigabitEthernet0/0.30| 192.168.30.2      | 255.255.255.0 | N/A (Router)      | Employees VLAN (VLAN 30) - HSRP Standby         |
 |                  | GigabitEthernet0/0.40| 192.168.40.2      | 255.255.255.0 | N/A (Router)      | Servers VLAN (VLAN 40) - HSRP Standby           |
 |                  | GigabitEthernet0/0.50| 192.168.50.2       | 255.255.255.0   | N/A (Router)      | Wireless VLAN (VLAN 50) - HSRP Standby          |
+|                  | GigabitEthernet0/0.99| 192.168.99.2       | 255.255.255.0   | N/A (Router)      | Native VLAN (VLAN 99) - HSRP Active           |
+|                  | GigabitEthernet0/0.100| 192.168.100.2       | 255.255.255.0   | N/A (Router)      | Management VLAN (VLAN 100) - HSRP Active           |
 |                       |                                     |                                  |                                                               |
-| **HSRP Virtual IPs** |                  |                   |                 |                   | (These are the Default Gateways for Clients)    |
-|                  | VLAN 10 (HR/Mgmt)  | 192.168.10.11       | 255.255.255.0 | N/A (VIP)         | Clients in HR/Management VLAN use this as DG    |
-|                  | VLAN 20 (IT)       | 192.168.20.11      | 255.255.255.0 | N/A (VIP)         | Clients in IT VLAN use this as DG               |
-|                  | VLAN 30 (Employees)| 192.168.30.11      | 255.255.255.0 | N/A (VIP)         | Clients in Employees VLAN use this as DG        |
-|                  | VLAN 40 (Servers)  | 192.168.40.11      | 255.255.255.0 | N/A (VIP)         | Servers in Servers VLAN use this as DG          |
-|                  | VLAN 50 (Wireless) | 192.168.50.11       | 255.255.255.0   | N/A (VIP)         | Clients in Wireless VLAN use this as DG         |
+| **HSRP Virtual IPs** |                  |                   |                 |                   | (Default Gateways)    |
+|                  | VLAN 10 (HR/Mgmt)  | 192.168.10.11       | 255.255.255.0 | N/A (Virtual IP)         | HR VLAN Default Gateway    |
+|                  | VLAN 20 (IT)       | 192.168.20.11      | 255.255.255.0 | N/A (Virtual IP)         | IT VLAN Default Gateway               |
+|                  | VLAN 30 (Employees)| 192.168.30.11      | 255.255.255.0 | N/A (Virtual IP)         | Employees VLAN Default Gateway        |
+|                  | VLAN 40 (Servers)  | 192.168.40.11      | 255.255.255.0 | N/A (Virtual IP)         | Servers VLAN Default Gateway          |
+|                  | VLAN 50 (Wireless) | 192.168.50.11       | 255.255.255.0   | N/A (Virtual IP)         | Wireless VLAN Default Gateway         |
+|                  | VLAN 99 (Native)  | 192.168.99.11      | 255.255.255.0 | N/A (Virtual IP)         | Native VLAN Default Gateway          |
+|                  | VLAN 100 (Management)  | 192.168.100.11      | 255.255.255.0 | N/A (Virtual IP)         | Management VLAN Default Gateway          |
 |                       |                                     |                                  |                                                               |
-| **Switch-1** | VLAN 20            | 192.168.0.37       | 255.255.255.224 | 192.168.0.34       | Switch IP on IT VLAN                            |
-| **Switch-2** | VLAN 20            | 192.168.0.38       | 255.255.255.224 | 192.168.0.34       | Switch IP on IT VLAN                            |
+| **Switch-1** | VLAN 20            | 192.168.100.3       | 255.255.255.0 | 192.168.100.11       | Switch IP on Management VLAN                            |
+| **Switch-2** | VLAN 20            | 192.168.100.4       | 255.255.255.0 | 192.168.100.11       | Switch IP on Management VLAN                            |
 |                       |                                     |                                  |                                                               |
 | **End Devices** |                    |                   |                 |                   | (DHCP configured, these would be assigned)      |
 | Management PC    | Ethernet           | 192.168.0.10      | 255.255.255.224 | 192.168.0.2       | Example PC in HR/Management VLAN                |
