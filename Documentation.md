@@ -9,10 +9,10 @@
 This documentation represents our ideas for a small-scale company's network made specifically for our capstone project. Recorded below would detail the physical and and logical layout, network and subnetworks, device details, configurations, and security measures. This documentation could also be used as a reference for troubleshooting, upgrades, and general network management.
 
 ## Physical Network Topology
-<img width="2254" height="1351" alt="Office Floor Plan (3)" src="https://github.com/user-attachments/assets/98cadee3-954e-4c67-9919-f867000e5d02" />
+<img width="2254" height="1351" alt="Office Floor Plan" src="https://github.com/user-attachments/assets/ebe99bf3-f15e-4284-9f60-b06ebd1cd78c" />
 
 ## Logical Network Topology
-<img width="4560" height="2800" alt="Network Topology (5)" src="https://github.com/user-attachments/assets/710a5bce-f620-48c0-afc2-34dd39b55b76" />
+<img width="4560" height="2800" alt="Network Topology" src="https://github.com/user-attachments/assets/d3c3e359-0213-436b-b6e2-d186dc9aac86" />
 
 ## Addressing Table
 This network uses NAT to translate from our ISP's network of 10.128.209.0/24 to our network of 192.168.0.0/23.
@@ -25,37 +25,36 @@ This network uses NAT to translate from our ISP's network of 10.128.209.0/24 to 
 | **ISP Router** | GigabitEthernet0/1            | 10.128.209.1      | 255.255.255.0   | N/A               | Your internet gateway                           |
 |                       |                                     |                                  |                                                               |
 | **Gateway-Router** | GigabitEthernet0/1   | 10.128.209.2      | 255.255.255.0   | 10.128.209.1      | Connection to ISP (Outside NAT)                 |
-|                  | GigabitEthernet0/0.10| 192.168.0.1       | 255.255.255.224 | N/A (Router)      | HR/Management VLAN (VLAN 10) - HSRP Active      |
-|                  | GigabitEthernet0/0.20| 192.168.0.33      | 255.255.255.224 | N/A (Router)      | IT VLAN (VLAN 20) - HSRP Active                 |
-|                  | GigabitEthernet0/0.30| 192.168.0.65      | 255.255.255.224 | N/A (Router)      | Employees VLAN (VLAN 30) - HSRP Active          |
-|                  | GigabitEthernet0/0.40| 192.168.0.97      | 255.255.255.224 | N/A (Router)      | Servers VLAN (VLAN 40) - HSRP Active            |
-|                  | GigabitEthernet0/0.50| 192.168.1.1       | 255.255.255.0   | N/A (Router)      | Wireless VLAN (VLAN 50) - HSRP Active           |
+|                  | GigabitEthernet0/0.10| 192.168.10.1       | 255.255.255.0 | N/A (Router)      | HR/Management VLAN (VLAN 10) - HSRP Active      |
+|                  | GigabitEthernet0/0.20| 192.168.20.1      | 255.255.255.0 | N/A (Router)      | IT VLAN (VLAN 20) - HSRP Active                 |
+|                  | GigabitEthernet0/0.30| 192.168.30.1      | 255.255.255.0 | N/A (Router)      | Employees VLAN (VLAN 30) - HSRP Active          |
+|                  | GigabitEthernet0/0.40| 192.168.40.1      | 255.255.255.0 | N/A (Router)      | Servers VLAN (VLAN 40) - HSRP Active            |
+|                  | GigabitEthernet0/0.50| 192.168.50.1       | 255.255.255.0   | N/A (Router)      | Wireless VLAN (VLAN 50) - HSRP Active           |
 |                       |                                     |                                  |                                                               |
 | **Backup-Router**| GigabitEthernet0/1   | 10.128.209.3      | 255.255.255.0   | 10.128.209.1      | Connection to ISP (Outside NAT)                 |
-|                  | GigabitEthernet0/0.10| 192.168.0.3       | 255.255.255.224 | N/A (Router)      | HR/Management VLAN (VLAN 10) - HSRP Standby     |
-|                  | GigabitEthernet0/0.20| 192.168.0.35      | 255.255.255.224 | N/A (Router)      | IT VLAN (VLAN 20) - HSRP Standby                |
-|                  | GigabitEthernet0/0.30| 192.168.0.67      | 255.255.255.224 | N/A (Router)      | Employees VLAN (VLAN 30) - HSRP Standby         |
-|                  | GigabitEthernet0/0.40| 192.168.0.99      | 255.255.255.224 | N/A (Router)      | Servers VLAN (VLAN 40) - HSRP Standby           |
-|                  | GigabitEthernet0/0.50| 192.168.1.3       | 255.255.255.0   | N/A (Router)      | Wireless VLAN (VLAN 50) - HSRP Standby          |
+|                  | GigabitEthernet0/0.10| 192.168.10.2       | 255.255.255.0 | N/A (Router)      | HR/Management VLAN (VLAN 10) - HSRP Standby     |
+|                  | GigabitEthernet0/0.20| 192.168.20.2      | 255.255.255.0 | N/A (Router)      | IT VLAN (VLAN 20) - HSRP Standby                |
+|                  | GigabitEthernet0/0.30| 192.168.30.2      | 255.255.255.0 | N/A (Router)      | Employees VLAN (VLAN 30) - HSRP Standby         |
+|                  | GigabitEthernet0/0.40| 192.168.40.2      | 255.255.255.0 | N/A (Router)      | Servers VLAN (VLAN 40) - HSRP Standby           |
+|                  | GigabitEthernet0/0.50| 192.168.50.2       | 255.255.255.0   | N/A (Router)      | Wireless VLAN (VLAN 50) - HSRP Standby          |
 |                       |                                     |                                  |                                                               |
 | **HSRP Virtual IPs** |                  |                   |                 |                   | (These are the Default Gateways for Clients)    |
-|                  | VLAN 10 (HR/Mgmt)  | 192.168.0.2       | 255.255.255.224 | N/A (VIP)         | Clients in HR/Management VLAN use this as DG    |
-|                  | VLAN 20 (IT)       | 192.168.0.34      | 255.255.255.224 | N/A (VIP)         | Clients in IT VLAN use this as DG               |
-|                  | VLAN 30 (Employees)| 192.168.0.66      | 255.255.255.224 | N/A (VIP)         | Clients in Employees VLAN use this as DG        |
-|                  | VLAN 40 (Servers)  | 192.168.0.98      | 255.255.255.224 | N/A (VIP)         | Servers in Servers VLAN use this as DG          |
-|                  | VLAN 50 (Wireless) | 192.168.1.2       | 255.255.255.0   | N/A (VIP)         | Clients in Wireless VLAN use this as DG         |
+|                  | VLAN 10 (HR/Mgmt)  | 192.168.10.3       | 255.255.255.0 | N/A (VIP)         | Clients in HR/Management VLAN use this as DG    |
+|                  | VLAN 20 (IT)       | 192.168.20.3      | 255.255.255.0 | N/A (VIP)         | Clients in IT VLAN use this as DG               |
+|                  | VLAN 30 (Employees)| 192.168.30.3      | 255.255.255.0 | N/A (VIP)         | Clients in Employees VLAN use this as DG        |
+|                  | VLAN 40 (Servers)  | 192.168.40.3      | 255.255.255.0 | N/A (VIP)         | Servers in Servers VLAN use this as DG          |
+|                  | VLAN 50 (Wireless) | 192.168.50.3       | 255.255.255.0   | N/A (VIP)         | Clients in Wireless VLAN use this as DG         |
 |                       |                                     |                                  |                                                               |
 | **Switch-1** | VLAN 20            | 192.168.0.37       | 255.255.255.224 | 192.168.0.34       | Switch IP on IT VLAN                            |
 | **Switch-2** | VLAN 20            | 192.168.0.38       | 255.255.255.224 | 192.168.0.34       | Switch IP on IT VLAN                            |
 |                       |                                     |                                  |                                                               |
-| **End Devices (Examples)** |                    |                   |                 |                   | (DHCP configured, these would be assigned)      |
+| **End Devices** |                    |                   |                 |                   | (DHCP configured, these would be assigned)      |
 | Management PC    | Ethernet           | 192.168.0.10      | 255.255.255.224 | 192.168.0.2       | Example PC in HR/Management VLAN                |
 | IT PC     | Ethernet           | 192.168.0.40      | 255.255.255.224 | 192.168.0.34      | Example PC in IT VLAN                    |
 | Employees PC     | Ethernet           | 192.168.0.70      | 255.255.255.224 | 192.168.0.66      | Example PC in Employees VLAN                    |
 | AD DS/DNS/DHCP Server   | Ethernet           | 192.168.0.101     | 255.255.255.224 | 192.168.0.98      |  AD DS/DNS/DHCP Server in Servers VLAN                  |
 | File/Backup Server   | Ethernet           | 192.168.0.102     | 255.255.255.224 | 192.168.0.98      | File/Backup Server in Servers VLAN                  |
 | Email/Web Service Server   | Ethernet           | 192.168.0.103     | 255.255.255.224 | 192.168.0.98      | Email/Web Service Server in Servers VLAN                  |
-| Server Example   | Ethernet           | 192.168.0.104+     | 255.255.255.224 | 192.168.0.98      | Example Server in Servers VLAN                  |
 | Wireless Access Point | Ethernet/Wireless  | 192.168.1.10      | 255.255.255.0   | 192.168.1.2       | Wireless AP in Wireless VLAN     |
 ## Running-Configs
 These are the configurations for the routers and switches that were used:
@@ -310,248 +309,3 @@ When it comes to password management, we would be using Bitwarden, Microsoft Ent
 * **Entra ID's logs** provide Sentinel with a stream of authentication events, allowing it to detect threats like unusual login locations, multiple failed sign-in attempts, or attempts to bypass MFA.
 * **Bitwarden's logs** add a critical layer of visibility by showing how users are interacting with their stored passwords. For example, Sentinel can be configured to alert if a user who logged in from an unusual location suddenly accesses a large number of sensitive credentials in a short period. This correlation is a powerful way to identify a compromised account.
 * If Sentinel detects a high-risk event, it can trigger an automated response. For instance, a playbook could be configured to immediately disable a user's Entra ID account and force a password reset for their Bitwarden vault, effectively neutralizing the threat.
-
-
-
-
-
-
-10 HR
-20 IT
-30 Employees
-40 Servers
-50 Wireless
-80 Firewall
-99 Native
-100 Management
-
-hostname Gateway-Router
-!
-boot-start-marker
-boot-end-marker
-!
-!
-enable secret 5 $1$Gpn.$7Pm/JU43Rb5XYLMK6SOf.1
-!
-no aaa new-model
-!
-!
-!
-!
-!
-!
-!
-!
-!
-!
-!
-!
-!
-!
-ip cef
-login block-for 120 attempts 5 within 30
-no ipv6 cef
-!
-multilink bundle-name authenticated
-!
-!
-cts logging verbose
-!
-!
-license udi pid CISCO2901/K9 sn FJC2037A0Q4
-license boot module c2900 technology-package securityk9
-!
-!
-username admin privilege 15 secret 5 $1$SKb6$96D2wpEZffuRA7Nj9bj4V.
-!
-redundancy
-!
-!
-!
-!
-!
-!
-!
-!
-!
-!
-!
-!
-!
-!
-!
-interface Embedded-Service-Engine0/0
- no ip address
- shutdown
-!
-interface GigabitEthernet0/0
- no ip address
- duplex auto
- speed auto
-!
-interface GigabitEthernet0/0.10
- encapsulation dot1Q 10
- ip address 192.168.10.1 255.255.255.0
- ip helper-address 192.168.40.101
- ip ospf 1 area 0
- vrrp 10 ip 192.168.10.11
- no cdp enable
-!
-interface GigabitEthernet0/0.20
- encapsulation dot1Q 20
- ip address 192.168.20.1 255.255.255.0
- ip helper-address 192.168.40.101
- ip ospf 1 area 0
- vrrp 20 ip 192.168.20.11
- no cdp enable
-!
-interface GigabitEthernet0/0.30
- encapsulation dot1Q 30
- ip address 192.168.30.1 255.255.255.0
- ip helper-address 192.168.40.101
- ip ospf 1 area 0
- vrrp 30 ip 192.168.30.11
-!
-interface GigabitEthernet0/0.40
- encapsulation dot1Q 40
- ip address 192.168.40.1 255.255.255.0
- ip helper-address 192.168.40.101
- ip ospf 1 area 0
- vrrp 40 ip 192.168.40.11
-!
-interface GigabitEthernet0/0.50
- encapsulation dot1Q 50
- ip address 192.168.50.1 255.255.255.0
- ip helper-address 192.168.40.101
- ip ospf 1 area 0
- vrrp 50 ip 192.168.50.11
-!
-interface GigabitEthernet0/0.99
- encapsulation dot1Q 99 native
- ip address 192.168.99.1 255.255.255.0
- ip ospf 1 area 0
- vrrp 99 ip 192.168.99.11
-!
-interface GigabitEthernet0/0.100
- encapsulation dot1Q 100
- ip address 192.168.100.1 255.255.255.0
- ip ospf 1 area 0
- vrrp 100 ip 192.168.100.11
-!
-interface GigabitEthernet0/1
- ip address 192.168.80.2 255.255.255.0
- ip ospf 1 area 0
- duplex auto
- speed auto
-!
-interface Serial0/0/0
- no ip address
- shutdown
- clock rate 2000000
-!
-interface Serial0/0/1
- no ip address
- shutdown
- clock rate 2000000
-!
-router ospf 1
- router-id 1.1.1.1
- network 192.168.10.0 0.0.0.255 area 0
- network 192.168.20.0 0.0.0.255 area 0
- network 192.168.30.0 0.0.0.255 area 0
- network 192.168.40.0 0.0.0.255 area 0
- network 192.168.50.0 0.0.0.255 area 0
- network 192.168.80.0 0.0.0.255 area 0
- network 192.168.99.0 0.0.0.255 area 0
- network 192.168.100.0 0.0.0.255 area 0
- default-information originate always
-!
-ip forward-protocol nd
-!
-no ip http server
-no ip http secure-server
-!
-ip route 0.0.0.0 0.0.0.0 192.168.80.1
-!
-!
-!
-!
-!
-control-plane
-!
-!
-!
-line con 0
- exec-timeout 5 0
- password 7 0236051F4F115F3348
- logging synchronous
- login local
-line aux 0
-line 2
- no activation-character
- no exec
- transport preferred none
- transport output pad telnet rlogin lapb-ta mop udptn v120 ssh
- stopbits 1
-line vty 0 4
- exec-timeout 5 0
- login local
- transport input ssh
-!
-scheduler allocate 20000 1000
-!
-end
-
-interface FastEthernet0/23
- switchport trunk native vlan 99
- switchport trunk allowed vlan 10,20,30,40,50,99,100
- switchport mode trunk
- channel-group 1 mode active
-!
-interface FastEthernet0/24
- switchport trunk native vlan 99
- switchport trunk allowed vlan 10,20,30,40,50,99,100
- switchport mode trunk
- channel-group 1 mode active
-!
-interface GigabitEthernet0/1
- switchport trunk native vlan 99
- switchport trunk allowed vlan 10,20,30,40,50,99,100
- switchport mode trunk
-!
-interface GigabitEthernet0/2
-!
-interface Vlan1
- no ip address
- shutdown
-!
-interface Vlan100
- ip address 192.168.100.4 255.255.255.0
-!
-ip default-gateway 192.168.100.11
-ip http server
-ip http secure-server
-!
-!
-line con 0
-line vty 5 15
-!
-end
-
-Switch-2#show int trunk
-
-Port        Mode             Encapsulation  Status        Native vlan
-Gi0/1       on               802.1q         trunking      99
-Po1         on               802.1q         trunking      99
-
-Port        Vlans allowed on trunk
-Gi0/1       10,20,30,40,50,99-100
-Po1         10,20,30,40,50,99-100
-
-Port        Vlans allowed and active in management domain
-Gi0/1       10,20,30,40,50,99-100
-Po1         10,20,30,40,50,99-100
-
-Port        Vlans in spanning tree forwarding state and not pruned
-Gi0/1       10,20,30,40,50,99-100
-Po1         10,20,30,40,50,99-100
