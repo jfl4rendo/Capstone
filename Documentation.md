@@ -39,11 +39,11 @@ This network uses NAT to translate from our ISP's network of 10.128.209.0/24 to 
 |                  | GigabitEthernet0/0.50| 192.168.50.2       | 255.255.255.0   | N/A (Router)      | Wireless VLAN (VLAN 50) - HSRP Standby          |
 |                       |                                     |                                  |                                                               |
 | **HSRP Virtual IPs** |                  |                   |                 |                   | (These are the Default Gateways for Clients)    |
-|                  | VLAN 10 (HR/Mgmt)  | 192.168.10.3       | 255.255.255.0 | N/A (VIP)         | Clients in HR/Management VLAN use this as DG    |
-|                  | VLAN 20 (IT)       | 192.168.20.3      | 255.255.255.0 | N/A (VIP)         | Clients in IT VLAN use this as DG               |
-|                  | VLAN 30 (Employees)| 192.168.30.3      | 255.255.255.0 | N/A (VIP)         | Clients in Employees VLAN use this as DG        |
-|                  | VLAN 40 (Servers)  | 192.168.40.3      | 255.255.255.0 | N/A (VIP)         | Servers in Servers VLAN use this as DG          |
-|                  | VLAN 50 (Wireless) | 192.168.50.3       | 255.255.255.0   | N/A (VIP)         | Clients in Wireless VLAN use this as DG         |
+|                  | VLAN 10 (HR/Mgmt)  | 192.168.10.11       | 255.255.255.0 | N/A (VIP)         | Clients in HR/Management VLAN use this as DG    |
+|                  | VLAN 20 (IT)       | 192.168.20.11      | 255.255.255.0 | N/A (VIP)         | Clients in IT VLAN use this as DG               |
+|                  | VLAN 30 (Employees)| 192.168.30.11      | 255.255.255.0 | N/A (VIP)         | Clients in Employees VLAN use this as DG        |
+|                  | VLAN 40 (Servers)  | 192.168.40.11      | 255.255.255.0 | N/A (VIP)         | Servers in Servers VLAN use this as DG          |
+|                  | VLAN 50 (Wireless) | 192.168.50.11       | 255.255.255.0   | N/A (VIP)         | Clients in Wireless VLAN use this as DG         |
 |                       |                                     |                                  |                                                               |
 | **Switch-1** | VLAN 20            | 192.168.0.37       | 255.255.255.224 | 192.168.0.34       | Switch IP on IT VLAN                            |
 | **Switch-2** | VLAN 20            | 192.168.0.38       | 255.255.255.224 | 192.168.0.34       | Switch IP on IT VLAN                            |
