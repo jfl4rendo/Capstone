@@ -71,235 +71,52 @@ These are the configurations for the routers and switches that were used:
 ### Backup Router Configuration
 
 ### Switch 1 Configuration
-version 15.2
-no service pad
-service timestamps debug datetime msec
-service timestamps log datetime msec
-service password-encryption
-!
-hostname Switch-1
-!
-boot-start-marker
-boot-end-marker
-!
-!
-username admin privilege 15 secret 5 $1$R5XH$dAXvEZ9HjoCoTwBQdwJXF1
-no aaa new-model
-system mtu routing 1500
-!
-!
-!
-!
-!
-!
-!
-login block-for 120 attempts 5 within 30
-!
-!
-crypto pki trustpoint TP-self-signed-3211258496
- enrollment selfsigned
- subject-name cn=IOS-Self-Signed-Certificate-3211258496
- revocation-check none
- rsakeypair TP-self-signed-3211258496
-!
-!
-crypto pki certificate chain TP-self-signed-3211258496
- certificate self-signed 01
-  3082022B 30820194 A0030201 02020101 300D0609 2A864886 F70D0101 05050030
-  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274
-  69666963 6174652D 33323131 32353834 3936301E 170D3933 30333031 30303030
-  35375A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649
-  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D33 32313132
-  35383439 3630819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281
-  8100A15A 3D4DB1D3 897F77BD 6F09417A 1D479E3A C5CDB2EF 9F524847 010CFD04
-  0B09192F 170FAEC6 9C18E388 9CA430CB B3C2BA5C F74811C1 B71A06FA 75B7497F
-  63B710F5 30199055 964907E0 579D7B3D 17C6C825 024F1EE9 1562F1C9 07E72460
-  CE52C65C 8E85A897 59952666 124D8BA6 B51D1DBB D4231197 FEDE6D6B 6B5BB1A0
-  24A70203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 301F0603
-  551D2304 18301680 147FCD21 7AA9CFF4 911D76DB 21C74310 FFDB5F1A 62301D06
-  03551D0E 04160414 7FCD217A A9CFF491 1D76DB21 C74310FF DB5F1A62 300D0609
-  2A864886 F70D0101 05050003 8181007C A5386F02 D3014622 2660AB5D BF6C87E2
-  CC183138 A8206EA4 014141FB 2076A363 66E3C79F 59E4AEF5 7416D2A5 3C3B1094
-  4CFB5BD0 0F34BFC5 B18603F3 1C711DC2 B03AE39C F9EA12C5 C218465B CF5B4C0F
-  3054243D 2B86D43D 3E81FFA4 AB4D082D DC570E6F 24238614 D4B3BC67 622C8E43
-  D48DB38E C5471E7C 747B2026 C7A958
-        quit
-spanning-tree mode pvst
-spanning-tree extend system-id
-!
-vlan internal allocation policy ascending
-!
-!
-!
-!
-!
-!
-interface Port-channel1
- switchport mode trunk
-!
-interface FastEthernet0/1
- switchport access vlan 10
- switchport mode access
- no cdp enable
-!
-interface FastEthernet0/2
- switchport access vlan 10
- switchport mode access
- no cdp enable
-!
-interface FastEthernet0/3
- switchport access vlan 10
- switchport mode access
- no cdp enable
-!
-interface FastEthernet0/4
- switchport access vlan 10
- switchport mode access
- no cdp enable
-!
-interface FastEthernet0/5
- switchport access vlan 10
- switchport mode access
- no cdp enable
-!
-interface FastEthernet0/6
- switchport access vlan 10
- switchport mode access
- no cdp enable
-!
-interface FastEthernet0/7
- switchport access vlan 10
- switchport mode access
- no cdp enable
-!
-interface FastEthernet0/8
- switchport access vlan 10
- switchport mode access
- no cdp enable
-!
-interface FastEthernet0/9
- switchport access vlan 10
- switchport mode access
- no cdp enable
-!
-interface FastEthernet0/10
- switchport access vlan 10
- switchport mode access
- no cdp enable
-!
-interface FastEthernet0/11
- switchport access vlan 10
- switchport mode access
- no cdp enable
-!
-interface FastEthernet0/12
- switchport access vlan 10
- switchport mode access
- no cdp enable
-!
-interface FastEthernet0/13
- switchport access vlan 30
- switchport mode access
- no cdp enable
-!
-interface FastEthernet0/14
- switchport access vlan 30
- switchport mode access
- no cdp enable
-!
-interface FastEthernet0/15
- switchport access vlan 30
- switchport mode access
- no cdp enable
-!
-interface FastEthernet0/16
- switchport access vlan 30
- switchport mode access
- no cdp enable
-!
-interface FastEthernet0/17
- switchport access vlan 30
- switchport mode access
- no cdp enable
-!
-interface FastEthernet0/18
- switchport access vlan 30
- switchport mode access
- no cdp enable
-!
-interface FastEthernet0/19
- switchport access vlan 30
- switchport mode access
- no cdp enable
-!
-interface FastEthernet0/20
- switchport access vlan 30
- switchport mode access
- no cdp enable
-!
-interface FastEthernet0/21
- switchport access vlan 30
- switchport mode access
- no cdp enable
-!
-interface FastEthernet0/22
- switchport access vlan 30
- switchport mode access
- no cdp enable
-!
-interface FastEthernet0/23
- switchport mode trunk
- no cdp enable
- channel-group 1 mode active
-!
-interface FastEthernet0/24
- switchport mode trunk
- no cdp enable
- channel-group 1 mode active
-!
-interface GigabitEthernet0/1
- switchport mode trunk
-!
-interface GigabitEthernet0/2
-!
-interface Vlan1
- no ip address
- shutdown
-!
-interface Vlan20
- ip address 192.168.0.37 255.255.255.224
-!
-ip default-gateway 192.168.0.34
-ip http server
-ip http secure-server
-!
-no vstack
-!
-line con 0
- exec-timeout 5 0
- password 7 00341242404C5B140B
- logging synchronous
- login local
- transport preferred none
- stopbits 1
-line vty 0 4
- exec-timeout 5 0
- login local
- transport input ssh
-line vty 5 15
- exec-timeout 5 0
- login local
- transport input ssh
-!
-end
+
 ### Switch 2 Configuration 
 
 ## Server and Service Configurations
-* Active Directory Domain Services  
-* DNS Server  
-* DHCP Server  
-* File Server  
-* Email Server  
+### Active Directory Domain Services
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d2afc0f0-a459-4400-8b3e-a9d9a514449d" />
+<div align="center">The Two Domain Controllers</div>  
+  
+
+### DNS Server
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/ea0ec2e7-2566-4571-87a1-f4139fa190a5" />
+<div align="center">DNS Server on DC1</div>  
+  
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/a24e9e63-6668-44de-92a5-3938f5e413e1" />
+<div align="center">DNS Server on DC2</div>  
+  
+
+### DHCP Server
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/0d7c0771-00c5-4417-935c-4128fbf506a8" />
+<div align="center">DC1 HR VLAN DHCP Pool</div>  
+  
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/278a0e01-8628-41dc-adc9-0626630f7132" />
+<div align="center">DC1 IT VLAN DHCP Pool</div>  
+  
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/ad04325b-5566-4ad2-b4b2-d7eae0672d6f" />
+<div align="center">DC1 Employees VLAN DHCP Pool</div>  
+  
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/9fa9654e-e842-40b2-8e28-e27926ec2dc4" />
+<div align="center">DC2 HR VLAN DHCP Pool (Failover)</div>  
+  
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/c810bc92-5de2-4ff1-9abe-8b320fdada1d" />
+<div align="center">DC2 IT VLAN DHCP Pool (Failover)</div>  
+  
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/4010fd7c-5e10-43ac-800a-56e3f6f28cad" />
+<div align="center">DC2 Employees VLAN DHCP Pool (Failover)</div>  
+  
+
+### File Server
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d62ce921-7587-4a7a-a65c-5fb018c80f1c" />
+<div align="center">Shared Folder(N:) found in File Share Server</div>
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/7157ad31-edcf-4f2e-ab1a-951f13df8c38" />
+<div align="center">Shared Folder(N:) being accessed in the Domain Controller</div>
+
+### Email Server  
+<img width="1920" height="1032" alt="image" src="https://github.com/user-attachments/assets/4a337836-644c-4092-b875-da7dfcb711c9" />
+<div align="center">All the Users from the Active Directory found in our Office 365 directory</div>
 
 ## Passwords Management
 
