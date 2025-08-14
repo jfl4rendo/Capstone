@@ -118,6 +118,10 @@ These are the configurations for the routers and switches that were used:
 <img width="1920" height="1032" alt="image" src="https://github.com/user-attachments/assets/4a337836-644c-4092-b875-da7dfcb711c9" />
 <div align="center">All the Users from the Active Directory found in our Office 365 directory</div>
 
+### Additional Work
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/3151177a-bae4-4ebe-9eab-c3f70d297960" />
+<div align="center">Network Scan</div>
+
 ## Passwords Management
 
 When it comes to password management, we would be using Bitwarden, Microsoft Entra ID, and Microsoft Sentinel to create a robust and secure system. Their synergy focuses on centralizing identities, enforcing strong policies, and actively monitoring for threats.
